@@ -15,6 +15,8 @@ jfind src -type f -name '*.py' --like "handles user authentication" --content
 jfind . --like "image or binary asset" -print0 | xargs -0 ls -l
 ```
 
+![jfind demo: install, jfind -h, and a semantic search](demo.gif)
+
 The semantic matching is done by [TypeSafe.ai](https://typesafe.ai)'s **jev** model, which
 answers typed yes/no questions with a calibrated probability. Everything else — walking the tree,
 `-name`, `-type`, `-maxdepth`, `.gitignore` — runs locally, so only the files that pass your
