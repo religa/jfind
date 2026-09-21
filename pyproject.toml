@@ -1,0 +1,97 @@
+[project]
+name = "jfind-cli"
+version = "0.1.0"
+description = "Find files by describing them in plain English: the find command with a semantic --like predicate"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Multi-MCP Team", email = "multi.mcp.team@gmail.com" }]
+requires-python = ">=3.13"
+keywords = [
+    "find",
+    "file-search",
+    "semantic-search",
+    "natural-language",
+    "cli",
+    "command-line",
+    "developer-tools",
+    "ai",
+    "llm",
+    "typesafe",
+    "jev",
+    "fd",
+    "filesystem",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: System :: Filesystems",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pathspec>=1.1.1",
+    "python-dotenv>=1.2.3",
+    "typesafe-sdk>=0.7.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/religa/jfind"
+Repository = "https://github.com/religa/jfind"
+Issues = "https://github.com/religa/jfind/issues"
+Changelog = "https://github.com/religa/jfind/blob/main/CHANGELOG.md"
+
+[project.scripts]
+jfind = "jfind.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.8",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.18,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "jfind"  # distribution is jfind-cli (jfind is taken on PyPI); import/command stay `jfind`
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D1",     # docstrings are not required on every symbol
+    "COM812", # trailing commas: handled by the formatter, which this rule fights
+    "T201",   # print() is how a CLI talks
+    "FBT",    # boolean positional args: fine for a handful of internal helpers
+    "EM",     # exception messages may be literals
+    "TRY003", # long messages in raise are fine
+    "CPY001", # no copyright headers
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+    "S101",    # assert is the point
+    "ANN",     # test signatures need no annotations
+    "PLR2004", # literal expected values
+    "PT018",   # compound asserts read as one check
+    "ARG",     # stubs accept arguments they ignore
+    "INP001",  # tests/ is not a package
+    "PLC0415", # local imports keep optional deps out of collection
+    "PTH",     # os.path is used on purpose to build expected strings
+    "TC",      # annotation-only imports need no TYPE_CHECKING block here
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
