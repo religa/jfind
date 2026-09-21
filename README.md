@@ -15,7 +15,7 @@ jfind src -type f -name '*.py' --like "handles user authentication" --content
 jfind . --like "image or binary asset" -print0 | xargs -0 ls -l
 ```
 
-![jfind demo: install, jfind -h, and a semantic search](demo.gif)
+![jfind demo: install, jfind -h, and a semantic search](https://github.com/user-attachments/assets/1714cdfa-a43d-4e15-a89b-e0b1f28568a2)
 
 The semantic matching is done by [TypeSafe.ai](https://typesafe.ai)'s **jev** model, which
 answers typed yes/no questions with a calibrated probability. Everything else — walking the tree,
